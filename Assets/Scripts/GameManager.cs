@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public float matchTxtTime;
     GameObject stageNumObject;
     int stage;
+    int count = 0;
 
     void Awake()
     {
@@ -254,10 +255,10 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
 
+        count += 1;
+        countText.text = count.ToString();
+
     }
-
-
-
 
     public void matchTxtOn_0() //퇴근메세지용
     {
@@ -317,6 +318,13 @@ public class GameManager : MonoBehaviour
     void flipGaugeOff()
     {
         flipG.transform.gameObject.SetActive(false);
+    }
+
+    void GameEnd()
+    {
+        Time.timeScale = 0.0f;
+        countText.text = countText.ToString();
+        end.SetActive(true);
     }
     //퇴근메시지도 퇴근시키기 위한 노력 끝
     //연습
