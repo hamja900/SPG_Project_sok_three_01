@@ -111,7 +111,14 @@ public class GameManager : MonoBehaviour
 
         if (firstCardImage == secondCardImage)
         {
-             
+            matchTxt.transform.Find("0").gameObject.SetActive(false);
+            matchTxt.transform.Find("1").gameObject.SetActive(false);
+            matchTxt.transform.Find ("2").gameObject.SetActive(false);
+            matchTxt.transform.Find("3").gameObject.SetActive(false);
+            matchTxt.transform.Find("4").gameObject.SetActive(false);
+            matchTxt.transform.Find("5").gameObject.SetActive(false);
+            matchTxt.transform.Find("Fail").gameObject.SetActive(false);
+
             switch (int.Parse(firstCardImage))//Åð±Ù·ÎÁ÷
             {
                
