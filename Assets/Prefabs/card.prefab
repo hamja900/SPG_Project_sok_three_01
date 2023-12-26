@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 7519924200951231169}
+  flip: {fileID: 8300000, guid: e2598e6bd01f2c042adea309f0993d6a, type: 3}
+  audioSource: {fileID: 0}
 --- !u!1 &6143568599309421935
 GameObject:
   m_ObjectHideFlags: 0
