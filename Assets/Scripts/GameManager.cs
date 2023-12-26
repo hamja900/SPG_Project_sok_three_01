@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject endTxt;
     public AudioSource audioSource;
     public AudioClip match;
+    public AudioClip fail;
     public Image flipG;
     public float flipTime;
     public float time = 30f;
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour
 
     public void isMatched()
     {
+        
         flipGaugeOff();
         string firstCardImage = firstCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
@@ -128,7 +130,7 @@ public class GameManager : MonoBehaviour
 
         if (firstCardImage == secondCardImage)
         {
-           
+            audioSource.PlayOneShot(match);
 
             switch (int.Parse(firstCardImage))//Åð±Ù·ÎÁ÷
             {
@@ -181,6 +183,7 @@ public class GameManager : MonoBehaviour
 
             firstCard.GetComponent <card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
+            audioSource.PlayOneShot(fail);
         }
 
         firstCard = null;
