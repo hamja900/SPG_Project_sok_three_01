@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Image flipG;
     public float flipTime;
     public float time = 30f;
+    public float matchTxtTime;
     GameObject stageNumObject;
     int stage;
 
@@ -32,6 +34,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1.0f;
+
+        matchTxtTime = 2f;
 
         stageNumObject = GameObject.Find("stageManager");
         stage = stageNumObject.GetComponent<stageManager>().StageNumber;
@@ -167,38 +171,57 @@ public class GameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(match);
 
+
             switch (int.Parse(firstCardImage))//퇴근로직
             {
-               
+
                 case 0:
                 case 1:
-                    matchTxt.transform.Find("0").gameObject.SetActive(true);
-                    Invoke("waitMatchTxt0", 2f);
+                    matchTxtOn_0();
+                    if (matchTxtTime <= 0)
+                    {
+                        matchTxtOff_0();
+                    }
                     break; //이혜미            
                 case 2:
                 case 3:
-                    matchTxt.transform.Find("1").gameObject.SetActive(true);
-                    Invoke("waitMatchTxt1", 2f);
+                    matchTxtOn_1();
+                    if (matchTxtTime <= 0)
+                    {
+                        matchTxtOff_1();
+                    }
                     break; //박태호
                 case 4:
                 case 5:
-                    matchTxt.transform.Find("2").gameObject.SetActive(true);
-                    Invoke("waitMatchTxt2", 2f);
+                    matchTxtOn_2();
+                    if (matchTxtTime <= 0)
+                    {
+                        matchTxtOff_2();
+                    }
                     break; //조민상
                 case 6:
                 case 7:
-                    matchTxt.transform.Find("3").gameObject.SetActive(true);
-                    Invoke("waitMatchTxt3", 2f);
+                    matchTxtOn_3();
+                    if (matchTxtTime <= 0)
+                    {
+                        matchTxtOff_3();
+                    }
                     break; //석동구
                 case 8:
                 case 9:
-                    matchTxt.transform.Find("4").gameObject.SetActive(true);
-                    Invoke("waitMatchTxt4", 2f);
+                    matchTxtOn_4();
+                    if (matchTxtTime <= 0)
+                    {
+                        matchTxtOff_4();
+                    }
                     break; //박영진
                 case 10:
                 case 11:
-                    matchTxt.transform.Find("5").gameObject.SetActive(true);
-                    Invoke("waitMatchTxt5", 2f);
+                    matchTxtOn_5();
+                    if (matchTxtTime <= 0)
+                    {
+                        matchTxtOff_5();
+                    }
                     break; //의문의 학생
 
 
@@ -212,8 +235,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            matchTxt.transform.Find("Fail").gameObject.SetActive(true);
-            Invoke("waitMatchTxt", 2f);
+
+            matchTxtOn_Fail();
+            if (matchTxtTime <= 0)
+            {
+                matchTxtOff_Fail();
+            }
+
 
 
             firstCard.GetComponent <card>().closeCard();
@@ -225,35 +253,68 @@ public class GameManager : MonoBehaviour
         secondCard = null;
     }
 
-    
-    void waitMatchTxt0()//퇴근메시지도 퇴근시키기 위한 노력 시작
+
+
+
+    public void matchTxtOn_0() //퇴근메세지용
+    {
+        matchTxt.transform.Find("0").gameObject.SetActive(true);
+    }
+    public void matchTxtOn_1()
+    {
+        matchTxt.transform.Find("1").gameObject.SetActive(true);
+    }
+    public void matchTxtOn_2()
+    {
+        matchTxt.transform.Find("2").gameObject.SetActive(true);
+    }
+    public void matchTxtOn_3()
+    {
+        matchTxt.transform.Find("3").gameObject.SetActive(true);
+    }
+    public void matchTxtOn_4()
+    {
+        matchTxt.transform.Find("4").gameObject.SetActive(true);
+    }
+    public void matchTxtOn_5()
+    {
+        matchTxt.transform.Find("5").gameObject.SetActive(true);
+    }
+    public void matchTxtOn_Fail()
+    {
+        matchTxt.transform.Find("Fail").gameObject.SetActive(true);
+    }
+    public void matchTxtOff_0()
     {
         matchTxt.transform.Find("0").gameObject.SetActive(false);
     }
-    void waitMatchTxt1()
+    public void matchTxtOff_1()
     {
         matchTxt.transform.Find("1").gameObject.SetActive(false);
     }
-    void waitMatchTxt2()
+    public void matchTxtOff_2()
     {
         matchTxt.transform.Find("2").gameObject.SetActive(false);
     }
-    void waitMatchTxt3()
+    public void matchTxtOff_3()
     {
         matchTxt.transform.Find("3").gameObject.SetActive(false);
     }
-    void waitMatchTxt4()
+    public void matchTxtOff_4()
     {
         matchTxt.transform.Find("4").gameObject.SetActive(false);
     }
-    void waitMatchTxt5()
+    public void matchTxtOff_5()
     {
         matchTxt.transform.Find("5").gameObject.SetActive(false);
     }
-    void waitMatchTxt()
+    public void matchTxtOff_Fail()
     {
         matchTxt.transform.Find("Fail").gameObject.SetActive(false);
     }
+    //퇴근메시지용
+
+
     void flipTimeOver()
     {
         if (firstCard != null)
