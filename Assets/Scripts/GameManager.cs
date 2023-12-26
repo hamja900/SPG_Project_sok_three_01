@@ -49,6 +49,20 @@ public class GameManager : MonoBehaviour
 
         stageNumObject = GameObject.Find("stageManager");
         stage = stageNumObject.GetComponent<stageManager>().StageNumber;
+        string bestTxt;
+
+        if (stage == 1) {
+            bestTxt = GameObject.Find("stageManager").GetComponent<stageManager>().SG1Best.ToString("N2");
+            bestTimeTxet.text = "Best : " + bestTxt;
+         } else if (stage == 2)
+        {
+            bestTxt = GameObject.Find("stageManager").GetComponent<stageManager>().SG2Best.ToString("N2");
+            bestTimeTxet.text = "Best : " + bestTxt;
+        } else if (stage == 3)
+        {
+            bestTxt = GameObject.Find("stageManager").GetComponent<stageManager>().SG3Best.ToString("N2");
+            bestTimeTxet.text = "Best : " + bestTxt;
+        }
 
         if (stage == 1)//ÀÌÁö¸ðµå 12Àå ·£´ý »Ñ¸®±â
         {
@@ -148,6 +162,14 @@ public class GameManager : MonoBehaviour
             {
                 bestScore = newScore;
                 bestTime.text = "Best : " + (time.ToString("N2"));
+                if (stage == 1)
+                {
+                    GameObject.Find("stageManager").GetComponent<stageManager>().SG1Best = bestScore;
+                }  else if (stage == 2) {
+                    GameObject.Find("stageManager").GetComponent<stageManager>().SG2Best = bestScore;
+                } else if (stage == 3) {
+                    GameObject.Find("stageManager").GetComponent<stageManager>().SG3Best = bestScore;
+                }
             }
             end.SetActive(true); //ÆË¾÷Ã¢
             Time.timeScale = 0.0f;

@@ -13,6 +13,11 @@ public class stageManager : MonoBehaviour
     public bool clearSG1 = true;
     public bool clearSG2 = false;
     public bool clearSG3 = false;
+
+    public float SG1Best = 0.00f;
+    public float SG2Best = 0.00f;
+    public float SG3Best = 0.00f;
+
     // Start is called before the first frame update
     void Start()
     {
