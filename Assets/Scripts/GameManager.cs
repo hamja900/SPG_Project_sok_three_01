@@ -146,5 +146,5 @@ public class GameManager : MonoBehaviour
     }
     //퇴근메시지도 퇴근시키기 위한 노력 끝
     //연습
-
+    //연습2
 }
