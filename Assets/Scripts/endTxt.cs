@@ -18,6 +18,6 @@ public class endTxt : MonoBehaviour
     }
     public void retryGame()
     {
-        SceneManager.LoadScene("StartScene");
+        SceneManager.LoadScene("StageScene");
     }
 }

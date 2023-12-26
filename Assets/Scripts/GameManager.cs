@@ -60,10 +60,12 @@ public class GameManager : MonoBehaviour
         } else if (stage == 2)
         {
             //hard
+            Debug.Log("hard");
         }
         else if (stage == 3) 
-        { 
+        {
             //hell
+            Debug.Log("Hell");
         }
  
         // Update is called once per frame
@@ -81,6 +83,14 @@ public class GameManager : MonoBehaviour
         {
             endTxt.SetActive(true);
             Time.timeScale = 0.0f;
+
+            if(stage == 1)
+            {
+                GameObject.Find("stageManager").GetComponent<stageManager>().clearSG2 = true;
+            } else if (stage == 2)
+            {
+                GameObject.Find("stageManager").GetComponent<stageManager>().clearSG3 = true;
+            } 
         }
 
         if (time < 10 && timeTxt.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("timeTxt_idle"))

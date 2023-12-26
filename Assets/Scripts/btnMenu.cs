@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class btnMenu : MonoBehaviour
 {
     public GameObject stage;
     public stageManager sm;
 
+    public GameObject button1;
+    public GameObject button2;
+
     public GameObject sgText;
     void Start()
     {
         stage = GameObject.Find("stageManager");
+
+        if (stage.GetComponent<stageManager>().clearSG2 == true)
+        {
+            button1.GetComponent<Image>().color = new Color(255 / 255f, 208 / 255f, 208 / 255f);
+        }
+        if (stage.GetComponent<stageManager>().clearSG3 == true)
+        {
+            button2.GetComponent<Image>().color = new Color(255 / 255f, 208 / 255f, 208 / 255f);
+        }
     }
 
     // Update is called once per frame
@@ -52,4 +66,10 @@ public class btnMenu : MonoBehaviour
             Invoke("sgTextClose", 2.0f);
         }
     }
+
+    void sgTextClose()
+    {
+        sgText.SetActive(false);
+    }
+
 }
