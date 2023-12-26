@@ -18,6 +18,11 @@ public class endTxt : MonoBehaviour
     }
     public void retryGame()
     {
+        SceneManager.LoadScene("StartScene");
+    }
+    public void MainMenu()
+    {
         SceneManager.LoadScene("StageScene");
     }
+
 }

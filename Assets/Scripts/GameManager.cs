@@ -13,7 +13,16 @@ public class GameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject matchTxt;//퇴근텍스트 가져오기용
     public Text timeTxt;
-    public GameObject endTxt;
+    public GameObject end; // 팝업창
+    public GameObject die; // 팝업창
+    public Text countText; //시도횟수
+    public Text endTime;
+    public Text bestTime;
+    public Text bestTimeTxet;
+
+    public float bestScore;
+    public float newScore;
+
     public AudioSource audioSource;
     public AudioClip match;
     public AudioClip fail;
@@ -23,7 +32,6 @@ public class GameManager : MonoBehaviour
     public float matchTxtTime;
     GameObject stageNumObject;
     int stage;
-    int count = 0; // 매칭횟수 초기화
 
     void Awake()
     {
@@ -120,18 +128,31 @@ public class GameManager : MonoBehaviour
 
         int cardsLeft = GameObject.Find("cards").transform.childCount;
 
-        if (time <= 0 || cardsLeft == 0)
+        if (time <= 0) //시간초 끝
         {
-            endTxt.SetActive(true);
+            die.SetActive(true);
             Time.timeScale = 0.0f;
 
-            if(stage == 1)
+        } else if (cardsLeft == 0) //카드 끝
+        {
+            endTime.text = time.ToString("N2");
+            newScore = time;
+            if(bestScore < newScore)
+            {
+                bestScore = newScore;
+                bestTime.text = "Best : " + (time.ToString("N2"));
+            }
+            end.SetActive(true); //팝업창
+            Time.timeScale = 0.0f;
+
+            if (stage == 1)
             {
                 GameObject.Find("stageManager").GetComponent<stageManager>().clearSG2 = true;
-            } else if (stage == 2)
+            }
+            else if (stage == 2)
             {
                 GameObject.Find("stageManager").GetComponent<stageManager>().clearSG3 = true;
-            } 
+            }
         }
 
         if (time < 10 && timeTxt.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("timeTxt_idle"))
@@ -253,8 +274,6 @@ public class GameManager : MonoBehaviour
         firstCard = null;
         secondCard = null;
 
-        count += 1;
-        endMatchNum.text = count.ToString();
     }
 
 
