@@ -36,9 +36,32 @@ public class GameManager : MonoBehaviour
         stageNumObject = GameObject.Find("stageManager");
         stage = stageNumObject.GetComponent<stageManager>().StageNumber;
 
-        if (stage == 1)
+        if (stage == 1)//ÀÌÁö¸ðµå 12Àå ·£´ý »Ñ¸®±â
         {
-            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
+            cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
+
+            matchTxt = GameObject.Find("Canvas/matchTxt");
+
+
+            for (int i = 0; i < 12; i++)
+            {
+
+
+                GameObject newCard = Instantiate(card);
+                newCard.transform.parent = GameObject.Find("cards").transform;
+
+                float x = (i / 4) * 1.1f - 1.2f;
+                float y = (i % 4) * 1.1f - 4.0f;
+                newCard.transform.position = new Vector3(x, y, 0);
+
+                string cardName = cards[i].ToString();
+                newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
+            }
+        }
+        else if (stage == 2)//ÇÏµå¸ðµå 16Àå ·£´ý »Ñ¸®±â
+        {
+            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7};
             cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
 
             matchTxt = GameObject.Find("Canvas/matchTxt");
@@ -51,25 +74,37 @@ public class GameManager : MonoBehaviour
                 GameObject newCard = Instantiate(card);
                 newCard.transform.parent = GameObject.Find("cards").transform;
 
-                float x = (i / 4) * 1.4f - 2.1f;
-                float y = (i % 4) * 1.4f - 3.0f;
+                float x = (i / 4) * 1.1f - 1.7f;
+                float y = (i % 4) * 1.1f - 4.2f;
                 newCard.transform.position = new Vector3(x, y, 0);
 
                 string cardName = cards[i].ToString();
                 newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
             }
-        } else if (stage == 2)
-        {
-            //hard
-            Debug.Log("hard");
         }
-        else if (stage == 3) 
+        else if (stage == 3)//Çï¸ðµå 24Àå ·£´ý»Ñ¸®±â
         {
-            //hell
-            Debug.Log("Hell");
+            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12};
+            cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
+
+            matchTxt = GameObject.Find("Canvas/matchTxt");
+
+
+            for (int i = 0; i < 24; i++)
+            {
+
+
+                GameObject newCard = Instantiate(card);
+                newCard.transform.parent = GameObject.Find("cards").transform;
+
+                float y = (i / 4) * 1.1f - 4.4f;
+                float x = (i % 4) * 1.1f - 1.7f;
+                newCard.transform.position = new Vector3(x, y, 0);
+
+                string cardName = cards[i].ToString();
+                newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
+            }
         }
- 
-        // Update is called once per frame
     }
 
     void Update()
