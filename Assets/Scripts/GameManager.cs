@@ -117,6 +117,12 @@ public class GameManager : MonoBehaviour
         time -= Time.deltaTime;
         timeTxt.text = time.ToString("N2");
         flipTime -= Time.deltaTime;
+        matchTxtTime -= Time.deltaTime;
+
+        if (matchTxtTime <= 0)
+        {
+            matchTxtOff();
+        }
 
         int cardsLeft = GameObject.Find("cards").transform.childCount;
 
@@ -160,7 +166,11 @@ public class GameManager : MonoBehaviour
         string firstCardImage = firstCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
 
-            matchTxt.transform.Find("0").gameObject.SetActive(false);
+        matchTxtTime = 2f;
+
+        matchTxtOff();
+
+        matchTxt.transform.Find("0").gameObject.SetActive(false);
             matchTxt.transform.Find("1").gameObject.SetActive(false);
             matchTxt.transform.Find ("2").gameObject.SetActive(false);
             matchTxt.transform.Find("3").gameObject.SetActive(false);
@@ -172,62 +182,36 @@ public class GameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(match);
 
-
             switch (int.Parse(firstCardImage))//퇴근로직
             {
 
                 case 0:
                 case 1:
                     matchTxtOn_0();
-                    if (matchTxtTime <= 0)
-                    {
-                        matchTxtOff_0();
-                    }
                     break; //이혜미            
                 case 2:
                 case 3:
                     matchTxtOn_1();
-                    if (matchTxtTime <= 0)
-                    {
-                        matchTxtOff_1();
-                    }
                     break; //박태호
                 case 4:
                 case 5:
                     matchTxtOn_2();
-                    if (matchTxtTime <= 0)
-                    {
-                        matchTxtOff_2();
-                    }
                     break; //조민상
                 case 6:
                 case 7:
                     matchTxtOn_3();
-                    if (matchTxtTime <= 0)
-                    {
-                        matchTxtOff_3();
-                    }
                     break; //석동구
                 case 8:
                 case 9:
                     matchTxtOn_4();
-                    if (matchTxtTime <= 0)
-                    {
-                        matchTxtOff_4();
-                    }
                     break; //박영진
                 case 10:
                 case 11:
                     matchTxtOn_5();
-                    if (matchTxtTime <= 0)
-                    {
-                        matchTxtOff_5();
-                    }
                     break; //의문의 학생
 
 
             }
-
 
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
@@ -238,10 +222,6 @@ public class GameManager : MonoBehaviour
         {
 
             matchTxtOn_Fail();
-            if (matchTxtTime <= 0)
-            {
-                matchTxtOff_Fail();
-            }
 
 
 
@@ -288,34 +268,17 @@ public class GameManager : MonoBehaviour
     {
         matchTxt.transform.Find("Fail").gameObject.SetActive(true);
     }
-    public void matchTxtOff_0()
+    public void matchTxtOff()
     {
         matchTxt.transform.Find("0").gameObject.SetActive(false);
-    }
-    public void matchTxtOff_1()
-    {
         matchTxt.transform.Find("1").gameObject.SetActive(false);
-    }
-    public void matchTxtOff_2()
-    {
         matchTxt.transform.Find("2").gameObject.SetActive(false);
-    }
-    public void matchTxtOff_3()
-    {
         matchTxt.transform.Find("3").gameObject.SetActive(false);
-    }
-    public void matchTxtOff_4()
-    {
         matchTxt.transform.Find("4").gameObject.SetActive(false);
-    }
-    public void matchTxtOff_5()
-    {
         matchTxt.transform.Find("5").gameObject.SetActive(false);
-    }
-    public void matchTxtOff_Fail()
-    {
         matchTxt.transform.Find("Fail").gameObject.SetActive(false);
     }
+
     //퇴근메시지용
 
 
