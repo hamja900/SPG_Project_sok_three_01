@@ -20,6 +20,9 @@ public class card : MonoBehaviour
   
     public void openCard()
     {
+        GameManager.I.flipTime = 5.0f;
+        GameManager.I.flipGaugeOn();
+
         anim.SetBool("isOpen", true);
         Invoke("wait", 0.4f);//카드 뒤집는 애니메이션이 진행되는 동안 cardFront의 등장을 늦춤
 
@@ -54,7 +57,7 @@ public class card : MonoBehaviour
         Invoke("closeCardInvoke", 1.0f);
     }
 
-    void closeCardInvoke()
+    public void closeCardInvoke()
     {
         anim.SetBool("isOpen", false);
         Invoke("waitBack", 0.4f);

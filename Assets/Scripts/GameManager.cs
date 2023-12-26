@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,7 +11,13 @@ public class GameManager : MonoBehaviour
     public GameObject firstCard;
     public GameObject secondCard;
     public GameObject matchTxt;//퇴근텍스트 가져오기용
-
+    public Text timeTxt;
+    public GameObject endTxt;
+    public AudioSource audioSource;
+    public AudioClip match;
+    public Image flipG;
+    public float flipTime;
+    public float time = 30f;
     GameObject stageNumObject;
     int stage;
 
@@ -23,6 +30,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
+
         stageNumObject = GameObject.Find("stageManager");
         stage = stageNumObject.GetComponent<stageManager>().StageNumber;
 
@@ -59,14 +68,43 @@ public class GameManager : MonoBehaviour
  
         // Update is called once per frame
     }
-       
-    void Update()
-        {
 
+    void Update()
+    {
+        time -= Time.deltaTime;
+        timeTxt.text = time.ToString("N2");
+        flipTime -= Time.deltaTime;
+
+        int cardsLeft = GameObject.Find("cards").transform.childCount;
+
+        if (time <= 0 || cardsLeft == 0)
+        {
+            endTxt.SetActive(true);
+            Time.timeScale = 0.0f;
         }
+
+        if (time < 10 && timeTxt.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("timeTxt_idle"))
+        {
+            timeTxt.GetComponent<Animator>().SetTrigger("isTime");
+        }
+        if (time < 5 && timeTxt.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("timeTxt_1"))
+        {
+            timeTxt.GetComponent<Animator>().SetTrigger("isTime");
+        }
+
+        if (flipTime <= 0)
+        {
+            flipTimeOver();
+            flipGaugeOff();
+        }
+        timeTxt.color = new Color(1, time * 8.5f / 255, time * 8.5f / 255, 1);
+        flipG.transform.localScale = new Vector3(flipTime * 0.2f, 1, 1);
+        flipG.color = new Color(1, flipTime * 51 / 255f, flipTime * 51 / 255f, 1);
+    }
 
     public void isMatched()
     {
+        flipGaugeOff();
         string firstCardImage = firstCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
 
@@ -159,6 +197,23 @@ public class GameManager : MonoBehaviour
     void waitMatchTxt()
     {
         matchTxt.transform.Find("Fail").gameObject.SetActive(false);
+    }
+    void flipTimeOver()
+    {
+        if (firstCard != null)
+        {
+            firstCard.GetComponent<card>().closeCardInvoke();
+            firstCard = null;
+        }
+    }
+
+    public void flipGaugeOn()
+    {
+        flipG.transform.gameObject.SetActive(true);
+    }
+    void flipGaugeOff()
+    {
+        flipG.transform.gameObject.SetActive(false);
     }
     //퇴근메시지도 퇴근시키기 위한 노력 끝
     //연습
