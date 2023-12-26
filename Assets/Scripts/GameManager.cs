@@ -108,9 +108,6 @@ public class GameManager : MonoBehaviour
         string firstCardImage = firstCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
 
-
-        if (firstCardImage == secondCardImage)
-        {
             matchTxt.transform.Find("0").gameObject.SetActive(false);
             matchTxt.transform.Find("1").gameObject.SetActive(false);
             matchTxt.transform.Find ("2").gameObject.SetActive(false);
@@ -118,6 +115,10 @@ public class GameManager : MonoBehaviour
             matchTxt.transform.Find("4").gameObject.SetActive(false);
             matchTxt.transform.Find("5").gameObject.SetActive(false);
             matchTxt.transform.Find("Fail").gameObject.SetActive(false);
+
+        if (firstCardImage == secondCardImage)
+        {
+           
 
             switch (int.Parse(firstCardImage))//Åð±Ù·ÎÁ÷
             {
