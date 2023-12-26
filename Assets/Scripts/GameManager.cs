@@ -150,4 +150,5 @@ public class GameManager : MonoBehaviour
     //연습3
     //연습4
     //연습5
+    //연습6
 }
