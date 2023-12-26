@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         }
         else if (stage == 3)//Çï¸ðµå 24Àå ·£´ý»Ñ¸®±â
         {
-            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12};
+            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11};
             cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
 
             matchTxt = GameObject.Find("Canvas/matchTxt");
