@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
 
     public void isMatched()
     {
+        
         flipGaugeOff();
         string firstCardImage = firstCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
 
         if (firstCardImage == secondCardImage)
         {
-           
+            audioSource.PlayOneShot(match);
 
             switch (int.Parse(firstCardImage))//Åð±Ù·ÎÁ÷
             {
