@@ -11,8 +11,10 @@ public class GameManager : MonoBehaviour
     public GameObject secondCard;
     public GameObject matchTxt;//퇴근텍스트 가져오기용
 
-   
-     void Awake()
+    GameObject stageNumObject;
+    int stage;
+
+    void Awake()
     {
         I = this;
     }
@@ -21,26 +23,40 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+        stageNumObject = GameObject.Find("stageManager");
+        stage = stageNumObject.GetComponent<stageManager>().StageNumber;
+
+        if (stage == 1)
+        {
+            int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
             cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
 
-        matchTxt = GameObject.Find("Canvas/matchTxt");
+            matchTxt = GameObject.Find("Canvas/matchTxt");
 
 
-        for (int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)
+            {
+
+
+                GameObject newCard = Instantiate(card);
+                newCard.transform.parent = GameObject.Find("cards").transform;
+
+                float x = (i / 4) * 1.4f - 2.1f;
+                float y = (i % 4) * 1.4f - 3.0f;
+                newCard.transform.position = new Vector3(x, y, 0);
+
+                string cardName = cards[i].ToString();
+                newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
+            }
+        } else if (stage == 2)
         {
-            
-
-            GameObject newCard = Instantiate(card);
-            newCard.transform.parent = GameObject.Find("cards").transform;
-
-            float x = (i / 4) * 1.4f - 2.1f;
-            float y = (i % 4) * 1.4f - 3.0f;
-            newCard.transform.position = new Vector3(x , y, 0);
-
-            string cardName = cards[i].ToString();
-            newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
+            //hard
         }
+        else if (stage == 3) 
+        { 
+            //hell
+        }
+ 
         // Update is called once per frame
     }
        
