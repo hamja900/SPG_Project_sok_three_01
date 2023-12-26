@@ -518,6 +518,7 @@ MonoBehaviour:
   endTxt: {fileID: 997384930}
   audioSource: {fileID: 355548676}
   match: {fileID: 8300000, guid: 58f54ea0f51249f4fa3fde4770d223a5, type: 3}
+  fail: {fileID: 8300000, guid: 46930f0af77f4dd4a8ed5eb0d092b189, type: 3}
   flipG: {fileID: 811597911}
   flipTime: 0
   time: 30

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject endTxt;
     public AudioSource audioSource;
     public AudioClip match;
+    public AudioClip fail;
     public Image flipG;
     public float flipTime;
     public float time = 30f;
@@ -172,6 +173,7 @@ public class GameManager : MonoBehaviour
 
             firstCard.GetComponent <card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
+            audioSource.PlayOneShot(fail);
         }
 
         firstCard = null;
