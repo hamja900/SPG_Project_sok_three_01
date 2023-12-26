@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public float matchTxtTime;
     GameObject stageNumObject;
     int stage;
+    int count = 0; // ¸ÅÄªÈ½¼ö ÃÊ±âÈ­
 
     void Awake()
     {
@@ -251,6 +252,9 @@ public class GameManager : MonoBehaviour
 
         firstCard = null;
         secondCard = null;
+
+        count += 1;
+        endMatchNum.text = count.ToString();
     }
 
 
