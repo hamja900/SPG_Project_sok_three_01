@@ -49,8 +49,6 @@ public class GameManager : MonoBehaviour
         startTime = false;
         Time.timeScale = 1.0f;
 
-        matchTxtTime = 2f;
-
         stageNumObject = GameObject.Find("stageManager");
         stage = stageNumObject.GetComponent<stageManager>().StageNumber;
         string bestTxt;
