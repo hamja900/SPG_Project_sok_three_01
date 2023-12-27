@@ -10,7 +10,10 @@ public class card : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        anim.SetBool("isOpen", true);
+        Invoke("wait", 0.4f);
+        Invoke("startCard", 2.4f);
     }
 
     // Update is called once per frame
@@ -70,6 +73,12 @@ public class card : MonoBehaviour
     {
         transform.Find("cardFront").gameObject.SetActive(false);
         transform.Find("cardBack").gameObject.SetActive(true);
+    }
+
+    void startCard()
+    {
+        anim.SetBool("isOpen", false);
+        Invoke("waitBack", 0.4f);
     }
 }
 
