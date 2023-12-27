@@ -80,6 +80,7 @@ public class card : MonoBehaviour
     {
         anim.SetBool("isOpen", false);
         Invoke("waitBack", 0.4f);
+        anim.SetBool("isFlipBack", true);
     }
 }
 
