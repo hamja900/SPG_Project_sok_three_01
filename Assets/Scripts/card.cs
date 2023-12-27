@@ -24,23 +24,25 @@ public class card : MonoBehaviour
   
     public void openCard()
     {
-        GameManager.I.flipTime = 5.0f;
-        GameManager.I.flipGaugeOn();
-        audioSource.PlayOneShot(flip);//박영진
-
-        anim.SetBool("isOpen", true);
-        Invoke("wait", 0.4f);//카드 뒤집는 애니메이션이 진행되는 동안 cardFront의 등장을 늦춤
-
-        if (GameManager.I.firstCard == null)
+        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
-            GameManager.I.firstCard = gameObject;
-        }
-        else
-        {
-            GameManager.I.secondCard = gameObject;
-            GameManager.I.isMatched();
-        }
+            GameManager.I.flipTime = 5.0f;
+            GameManager.I.flipGaugeOn();
+            audioSource.PlayOneShot(flip);//박영진
 
+            anim.SetBool("isOpen", true);
+            Invoke("wait", 0.4f);//카드 뒤집는 애니메이션이 진행되는 동안 cardFront의 등장을 늦춤
+
+            if (GameManager.I.firstCard == null)
+            {
+                GameManager.I.firstCard = gameObject;
+            }
+            else
+            {
+                GameManager.I.secondCard = gameObject;
+                GameManager.I.isMatched();
+            }
+        }
     } 
     void wait()
         {
