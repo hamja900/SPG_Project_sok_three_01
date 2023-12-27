@@ -8,7 +8,7 @@ public class log : MonoBehaviour
 {
     void Start()
     {
-        Invoke("sceneChange", 2);
+        sceneChange();
     }
 
     void Update()
@@ -18,6 +18,6 @@ public class log : MonoBehaviour
 
     void sceneChange()
     {
-        SceneManager.LoadScene("StageScene");
+        LoadingSceneManager.LoadScene("StageScene");
     }
 }
