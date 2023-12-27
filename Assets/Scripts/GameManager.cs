@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public float bestScore;
     public float newScore;
 
+    public bool startTime = false;
+
     public AudioSource audioSource;
     public AudioClip match;
     public AudioClip fail;
@@ -137,10 +139,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        time -= Time.deltaTime;
-        timeTxt.text = time.ToString("N2");
-        flipTime -= Time.deltaTime;
-        matchTxtTime -= Time.deltaTime;
+        if (startTime)
+        {
+            time -= Time.deltaTime;
+            timeTxt.text = time.ToString("N2");
+            flipTime -= Time.deltaTime;
+            matchTxtTime -= Time.deltaTime;
+        }
 
         if (matchTxtTime <= 0)
         {

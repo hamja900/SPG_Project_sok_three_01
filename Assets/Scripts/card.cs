@@ -21,6 +21,7 @@ public class card : MonoBehaviour
   
     public void openCard()
     {
+        GameManager.I.startTime = true;
         GameManager.I.flipTime = 5.0f;
         GameManager.I.flipGaugeOn();
         audioSource.PlayOneShot(flip);//¹Ú¿µÁø
