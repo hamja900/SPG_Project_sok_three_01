@@ -48,6 +48,7 @@ public class card : MonoBehaviour
         {
          transform.Find("cardFront").gameObject.SetActive(true);
          transform.Find("cardBack").gameObject.SetActive(false);
+         anim.SetBool("isFlipBack", false);
         }
 
     public void destroyCard()
@@ -69,20 +70,19 @@ public class card : MonoBehaviour
         transform.Find("cardBack").GetComponent<Renderer>().material.color = new Color(100 / 255f, 100 / 255f, 100 / 255f);
         anim.SetBool("isOpen", false);
         Invoke("waitBack", 0.4f);
-        anim.SetBool("isFlipBack", true);
     }
 
     void waitBack()
     {
         transform.Find("cardFront").gameObject.SetActive(false);
         transform.Find("cardBack").gameObject.SetActive(true);
+        anim.SetBool("isFlipBack", true);
     }
 
     void startCard()
     {
         anim.SetBool("isOpen", false);
         Invoke("waitBack", 0.4f);
-        anim.SetBool("isFlipBack", true);
     }
 }
 
