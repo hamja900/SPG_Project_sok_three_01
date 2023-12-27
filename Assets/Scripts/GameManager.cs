@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Text endTime;
     public Text bestTime;
     public Text bestTimeTxet;
-
+    public bool startTime = false;
     public AudioSource audioSource;
     public AudioClip match;
     public AudioClip fail;
@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        startTime = false;
         Time.timeScale = 1.0f;
 
         matchTxtTime = 2f;
@@ -133,10 +134,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        time -= Time.deltaTime;
-        timeTxt.text = time.ToString("N2");
-        flipTime -= Time.deltaTime;
-        matchTxtTime -= Time.deltaTime;
+        if (startTime)
+        {
+            time -= Time.deltaTime;
+            timeTxt.text = time.ToString("N2");
+            flipTime -= Time.deltaTime;
+            matchTxtTime -= Time.deltaTime;
+        }
 
         if (matchTxtTime <= 0)
         {
