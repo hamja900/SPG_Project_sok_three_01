@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     GameObject stageNumObject;
     int stage;
     int count = 0;
+    public GameObject minusTxt;
 
     void Awake()
     {
@@ -258,6 +259,8 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            GameObject timeM = Instantiate(minusTxt);
+            timeM.transform.parent = GameObject.Find("Canvas").transform;
             matchTxtOn_Fail();
             firstCard.GetComponent <card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
