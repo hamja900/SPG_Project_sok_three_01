@@ -260,7 +260,7 @@ public class GameManager : MonoBehaviour
         else
         {
             GameObject timeM = Instantiate(minusTxt);
-            timeM.transform.parent = GameObject.Find("Canvas").transform;
+            timeM.transform.SetParent(GameObject.Find("Canvas").transform, false);
             matchTxtOn_Fail();
             firstCard.GetComponent <card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
