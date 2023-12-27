@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject matchTxt;  //Åð±ÙÅØ½ºÆ® °¡Á®¿À±â¿ë
     public GameObject end;  //ÆË¾÷Ã¢
     public GameObject die;  //ÆË¾÷Ã¢
+    public GameObject win;  //ÆË¾÷Ã¢
 
     public Text countText;  //½ÃµµÈ½¼ö
     public Text timeTxt;
@@ -169,8 +170,17 @@ public class GameManager : MonoBehaviour
                     GameObject.Find("stageManager").GetComponent<stageManager>().SG3Best = bestScore;
                 }
             }
-            end.SetActive(true);  //ÆË¾÷Ã¢
-            Time.timeScale = 0.0f;
+            if (stage == 1 || stage == 2)
+            {
+                end.SetActive(true);  //ÆË¾÷Ã¢
+                Time.timeScale = 0.0f;
+            }
+            else if (stage == 3)
+            {
+                win.SetActive(true);
+                Time.timeScale = 0.0f; //Çï¸ðµå ¿£µù ÆË¾÷
+            }
+
 
             if (stage == 1)
             {
