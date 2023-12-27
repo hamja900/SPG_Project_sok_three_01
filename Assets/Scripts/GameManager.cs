@@ -28,8 +28,10 @@ public class GameManager : MonoBehaviour
     public AudioClip fail;
     public Image flipG;
     public float flipTime;
-    public float time = 30f;
+    public float time = 60f;
     public float matchTxtTime;
+    public float timeLimit; // 시간 감소
+    private float currentTime;
     GameObject stageNumObject;
     int stage;
     int count = 0;
@@ -39,8 +41,6 @@ public class GameManager : MonoBehaviour
         I = this;
     }
 
-
-    // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1.0f;
@@ -71,11 +71,8 @@ public class GameManager : MonoBehaviour
 
             matchTxt = GameObject.Find("Canvas/matchTxt");
 
-
             for (int i = 0; i < 12; i++)
             {
-
-
                 GameObject newCard = Instantiate(card);
                 newCard.transform.parent = GameObject.Find("cards").transform;
 
@@ -94,11 +91,8 @@ public class GameManager : MonoBehaviour
 
             matchTxt = GameObject.Find("Canvas/matchTxt");
 
-
             for (int i = 0; i < 16; i++)
             {
-
-
                 GameObject newCard = Instantiate(card);
                 newCard.transform.parent = GameObject.Find("cards").transform;
 
@@ -111,12 +105,12 @@ public class GameManager : MonoBehaviour
             }
         }
         else if (stage == 3)//헬모드 24장 랜덤뿌리기
+
         {
             int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11};
             cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
 
             matchTxt = GameObject.Find("Canvas/matchTxt");
-
 
             for (int i = 0; i < 24; i++)
             {
@@ -203,9 +197,14 @@ public class GameManager : MonoBehaviour
         flipG.color = new Color(1, flipTime * 51 / 255f, flipTime * 51 / 255f, 1);
     }
 
+
+    private void TimeDeduction()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void isMatched()
     {
-        
         flipGaugeOff();
         string firstCardImage = firstCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
@@ -259,19 +258,15 @@ public class GameManager : MonoBehaviour
 
             firstCard.GetComponent<card>().destroyCard();
             secondCard.GetComponent<card>().destroyCard();
-
-           
         }
         else
         {
-
             matchTxtOn_Fail();
-
-
-
             firstCard.GetComponent <card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
             audioSource.PlayOneShot(fail);
+            time -= 3.0f;       // 시간 빼기 
+            currentTime -= 3.0f;
         }
 
         firstCard = null;
@@ -349,12 +344,4 @@ public class GameManager : MonoBehaviour
         end.SetActive(true);
     }
     //퇴근메시지도 퇴근시키기 위한 노력 끝
-    //연습
-    //연습2
-    //연습3
-    //연습4
-    //연습5
-    //연습6
-    //연습7
-    //연습8
 }

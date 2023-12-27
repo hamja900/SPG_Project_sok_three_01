@@ -765,6 +765,7 @@ MonoBehaviour:
   flipTime: 0
   time: 60
   matchTxtTime: 0
+  timeLimit: 0
 --- !u!82 &355548676
 AudioSource:
   m_ObjectHideFlags: 0
