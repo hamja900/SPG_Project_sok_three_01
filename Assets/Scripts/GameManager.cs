@@ -8,29 +8,31 @@ using Unity.VisualScripting;
 public class GameManager : MonoBehaviour
 {
     public static GameManager I;
+
     public GameObject card;
     public GameObject firstCard;
     public GameObject secondCard;
-    public GameObject matchTxt;//퇴근텍스트 가져오기용
+    public GameObject matchTxt;  //퇴근텍스트 가져오기용
+    public GameObject end;  //팝업창
+    public GameObject die;  //팝업창
+
+    public Text countText;  //시도횟수
     public Text timeTxt;
-    public GameObject end; // 팝업창
-    public GameObject die; // 팝업창
-    public Text countText; //시도횟수
     public Text endTime;
     public Text bestTime;
     public Text bestTimeTxet;
-
-    public float bestScore;
-    public float newScore;
 
     public AudioSource audioSource;
     public AudioClip match;
     public AudioClip fail;
     public Image flipG;
+
     public float flipTime;
     public float time = 60f;
     public float matchTxtTime;
-    public float timeLimit; // 시간 감소
+    public float bestScore;
+    public float newScore;
+    public float timeLimit;  //시간 감소
     private float currentTime;
     GameObject stageNumObject;
     int stage;
@@ -64,7 +66,7 @@ public class GameManager : MonoBehaviour
             bestTimeTxet.text = "Best : " + bestTxt;
         }
 
-        if (stage == 1)//이지모드 12장 랜덤 뿌리기
+        if (stage == 1)  //이지모드 12장 랜덤 뿌리기
         {
             int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5 };
             cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
                 newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
             }
         }
-        else if (stage == 2)//하드모드 16장 랜덤 뿌리기
+        else if (stage == 2)  //하드모드 16장 랜덤 뿌리기
         {
             int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7};
             cards = cards.OrderBy(item => Random.Range(-1f, 1f)).ToArray();
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
                 newCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(cardName);
             }
         }
-        else if (stage == 3)//헬모드 24장 랜덤뿌리기
+        else if (stage == 3)  //헬모드 24장 랜덤뿌리기
 
         {
             int[] cards = { 0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11};
@@ -114,7 +116,6 @@ public class GameManager : MonoBehaviour
 
             for (int i = 0; i < 24; i++)
             {
-
 
                 GameObject newCard = Instantiate(card);
                 newCard.transform.parent = GameObject.Find("cards").transform;
@@ -143,12 +144,12 @@ public class GameManager : MonoBehaviour
 
         int cardsLeft = GameObject.Find("cards").transform.childCount;
 
-        if (time <= 0) //시간초 끝
+        if (time <= 0)  //시간초 끝
         {
             die.SetActive(true);
             Time.timeScale = 0.0f;
 
-        } else if (cardsLeft == 0) //카드 끝
+        } else if (cardsLeft == 0)  //카드 끝
         {
             endTime.text = time.ToString("N2");
             newScore = time;
@@ -165,7 +166,7 @@ public class GameManager : MonoBehaviour
                     GameObject.Find("stageManager").GetComponent<stageManager>().SG3Best = bestScore;
                 }
             }
-            end.SetActive(true); //팝업창
+            end.SetActive(true);  //팝업창
             Time.timeScale = 0.0f;
 
             if (stage == 1)
@@ -197,7 +198,6 @@ public class GameManager : MonoBehaviour
         flipG.color = new Color(1, flipTime * 51 / 255f, flipTime * 51 / 255f, 1);
     }
 
-
     private void TimeDeduction()
     {
         throw new System.NotImplementedException();
@@ -210,7 +210,6 @@ public class GameManager : MonoBehaviour
         string secondCardImage = secondCard.transform.Find("cardFront").GetComponent<SpriteRenderer>().sprite.name;
 
         matchTxtTime = 2f;
-
         matchTxtOff();
 
         matchTxt.transform.Find("0").gameObject.SetActive(false);
@@ -225,35 +224,33 @@ public class GameManager : MonoBehaviour
         {
             audioSource.PlayOneShot(match);
 
-            switch (int.Parse(firstCardImage))//퇴근로직
+            switch (int.Parse(firstCardImage))  //퇴근로직
             {
 
                 case 0:
                 case 1:
                     matchTxtOn_0();
-                    break; //이혜미            
+                    break;  //이혜미            
                 case 2:
                 case 3:
                     matchTxtOn_1();
-                    break; //박태호
+                    break;  //박태호
                 case 4:
                 case 5:
                     matchTxtOn_2();
-                    break; //조민상
+                    break;  //조민상
                 case 6:
                 case 7:
                     matchTxtOn_3();
-                    break; //석동구
+                    break;  //석동구
                 case 8:
                 case 9:
                     matchTxtOn_4();
-                    break; //박영진
+                    break;  //박영진
                 case 10:
                 case 11:
                     matchTxtOn_5();
-                    break; //의문의 학생
-
-
+                    break;  //의문의 학생
             }
 
             firstCard.GetComponent<card>().destroyCard();
@@ -265,7 +262,7 @@ public class GameManager : MonoBehaviour
             firstCard.GetComponent <card>().closeCard();
             secondCard.GetComponent<card>().closeCard();
             audioSource.PlayOneShot(fail);
-            time -= 3.0f;       // 시간 빼기 
+            time -= 3.0f;  //시간 감소
             currentTime -= 3.0f;
         }
 
@@ -274,10 +271,9 @@ public class GameManager : MonoBehaviour
 
         count += 1;
         countText.text = "시도 횟수 : " + count.ToString();
-
     }
 
-    public void matchTxtOn_0() //퇴근메세지용
+    public void matchTxtOn_0()  //퇴근메세지용
     {
         matchTxt.transform.Find("0").gameObject.SetActive(true);
     }
@@ -315,10 +311,7 @@ public class GameManager : MonoBehaviour
         matchTxt.transform.Find("5").gameObject.SetActive(false);
         matchTxt.transform.Find("Fail").gameObject.SetActive(false);
     }
-
     //퇴근메시지용
-
-
     void flipTimeOver()
     {
         if (firstCard != null)

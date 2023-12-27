@@ -749,15 +749,13 @@ MonoBehaviour:
   firstCard: {fileID: 0}
   secondCard: {fileID: 0}
   matchTxt: {fileID: 0}
-  timeTxt: {fileID: 1641499313}
   end: {fileID: 693173297}
   die: {fileID: 1383667963}
   countText: {fileID: 13496946}
+  timeTxt: {fileID: 1641499313}
   endTime: {fileID: 1457815480}
   bestTime: {fileID: 757001409}
   bestTimeTxet: {fileID: 596824386}
-  bestScore: 0
-  newScore: 0
   audioSource: {fileID: 355548676}
   match: {fileID: 8300000, guid: 58f54ea0f51249f4fa3fde4770d223a5, type: 3}
   fail: {fileID: 8300000, guid: 46930f0af77f4dd4a8ed5eb0d092b189, type: 3}
@@ -765,6 +763,8 @@ MonoBehaviour:
   flipTime: 0
   time: 60
   matchTxtTime: 0
+  bestScore: 0
+  newScore: 0
   timeLimit: 0
 --- !u!82 &355548676
 AudioSource:

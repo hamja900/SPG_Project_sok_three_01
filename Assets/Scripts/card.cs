@@ -5,12 +5,12 @@ using UnityEngine;
 public class card : MonoBehaviour
 {
     public Animator anim;
-    public AudioClip flip;//박영진
-    public AudioSource audioSource;//박영진
+    public AudioClip flip;  //박영진
+    public AudioSource audioSource;  //박영진
     float cr = 193f;
     float cg = 236f;
     float cb = 228f;
-    // Start is called before the first frame update
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -19,7 +19,6 @@ public class card : MonoBehaviour
         Invoke("startCard", 2.4f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         cr += Time.deltaTime * 19.3f;
@@ -51,10 +50,10 @@ public class card : MonoBehaviour
         {
             GameManager.I.flipTime = 5.0f;
             GameManager.I.flipGaugeOn();
-            audioSource.PlayOneShot(flip);//박영진
+            audioSource.PlayOneShot(flip);  //박영진
 
             anim.SetBool("isOpen", true);
-            Invoke("wait", 0.4f);//카드 뒤집는 애니메이션이 진행되는 동안 cardFront의 등장을 늦춤
+            Invoke("wait", 0.4f);  //카드 뒤집는 애니메이션이 진행되는 동안 cardFront의 등장을 늦춤
 
             if (GameManager.I.firstCard == null)
             {
