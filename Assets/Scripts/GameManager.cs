@@ -273,7 +273,7 @@ public class GameManager : MonoBehaviour
         secondCard = null;
 
         count += 1;
-        countText.text = count.ToString();
+        countText.text = "½Ãµµ È½¼ö : " + count.ToString();
 
     }
 
