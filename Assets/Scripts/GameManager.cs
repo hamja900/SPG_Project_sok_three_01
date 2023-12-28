@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     public float timeLimit;  //시간 감소
     private float currentTime;
     GameObject stageNumObject;
-    public int stage;
+    int stage;
     int count = 0;
     public GameObject minusTxt;
 
