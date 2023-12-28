@@ -27,6 +27,6 @@ public class endTxt : MonoBehaviour
 
     public void EndingScroll()
     {
-        SceneManager.LoadScene("EndingScene");
+        SceneManager.LoadScene("ending");
     }
 }
